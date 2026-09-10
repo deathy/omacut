@@ -1,5 +1,10 @@
 QT += core gui quick quickcontrols2 multimedia testlib
 CONFIG += c++17 testcase
+# qmake builds a GUI-subsystem binary on Windows by default, which detaches
+# stdout -- QtTest's results would go nowhere.
+win32: CONFIG += console
+# and an .app bundle on macOS, which bin/test would not find.
+macx: CONFIG -= app_bundle
 TARGET = backend_tests
 TEMPLATE = app
 
